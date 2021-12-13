@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'dart:math';
 
@@ -49,7 +50,6 @@ void main(List<String> args) {
   cities2.add(Aksaray);
   cities2.add(NewYork);
   print(cities2);
-  
 
 //Listenin içini for ile dönme
 
@@ -58,8 +58,8 @@ void main(List<String> args) {
     print(
         "Listenin ${i + 1}. elemanınında bulunan şehir ${currentCity["İl"]} Şehir kodu ${currentCity["Kodu"]} ve İlçe sayısı ${currentCity["İlce sayisi"]}");
   }
-print("********************************************");
-  //Soru-4  5 elemanlı 2 liste oluştur.Elemanlar sıfırdan 50 ye kadar rastgele oluşsun Bu elemanları tek bir listeye ekleyelim oluşan listenin elamanlarının karesini tutan bir set oluşturalım
+  print("********************************************");
+  //Soru-4 Elaman sayısı 5 olan 2 liste oluştur.Elemanlar sıfırdan 50 ye kadar rastgele oluşsun Bu elemanları tek bir listeye ekleyelim oluşan listenin elamanlarının karesini tutan bir set oluşturalım
 
   List n1 = List.filled(5, 0);
   List n2 = List.filled(5, 0);
@@ -68,16 +68,44 @@ print("********************************************");
 
   for (var i = 0; i < 5; i++) {
     n1[i] = rng.nextInt(50);
-  }
-  for (var i = 0; i < 5; i++) {
     n2[i] = rng.nextInt(50);
   }
-  List n = [...n1, ...n2];
-  print("Sayılar ${n}");
+  List son = [...n1, ...n2];
+  print("Sayılar ${son}");
 
   Set<int> set1 = {};
   for (var i = 0; i < 10; i++) {
-    set1.add(n[i] * n[i]);
+    set1.add(son[i] * son[i]);
   }
   print("Set: $set1");
+
+  print("***************************************");
+
+  //Soru 5   kullanıcıdan aldığınız integer pozitif sayıları bir listede tutun, kullanıcı -1 değerini girdiğinde girilen girilen sayıların ortalamasını yazdırın
+
+  List<int> nums = <int>[];
+  int numInput = 0;
+  do {
+    print("Enter number or -1 to exit");
+    numInput = int.parse(stdin.readLineSync()!);
+    if (numInput != -1 && numInput > 0) {
+      nums.add(numInput);
+    } else {
+      if (numInput == -1) {
+        break;
+      }
+      print("Lütfen sıfırdan büyük bir sayı giriniz");
+      continue;
+    }
+  } while (numInput != -1);
+
+  double ortalama(List<int> list) {
+    double total = 0;
+    for (var i = 0; i < list.length; i++) {
+      total = total + list[i];
+    }
+    return (total / (list.length));
+  }
+
+  print("Liste: ${nums} ve Listenin ortalaması: ${ortalama(nums)}");
 }
