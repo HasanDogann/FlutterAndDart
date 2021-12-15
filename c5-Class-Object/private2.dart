@@ -1,17 +1,27 @@
-class Databases {
-  String _userName = "";
-  String _password = "";
+import 'dart:math';
 
-  set userName(String userName) {
-    _userName = userName;
-  }
+class DatabaseConnection {
+  String _user = "Hasan";
+  String _password = "123456";
 
-  set password(String password) {
-    _password = password;
-  }
+DatabaseConnection(){}
+DatabaseConnection.loginWithNameandPasswoord(String user,String password){
+
+}
+
 
   bool connect() {
-    if (_userName == "hasan" && _password == "123456") {
+    if (_internetConnected()) {
+      if (_user == "Hasan" && _password == "123456") {
+        return true;
+      } else
+        return false;
+    } else
+      return false;
+  }
+
+  bool _internetConnected() {
+    if (Random().nextBool()) {
       return true;
     } else
       return false;
