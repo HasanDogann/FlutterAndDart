@@ -1,17 +1,8 @@
-void main(List<String> args) {
-  String username = "";
-
-  userById(7).then((value) {
-    print(value);
-    userByUsername(value['username']).then((List courses) {
-      print(courses);
-      String first = courses[0];
-      courseComment(first).then((String comment) {
-        print(first);
-        print(comment);
-      });
-    });
-  });
+void main(List<String> args) async {
+  Map<String, dynamic> getUser = await userById(6);
+  List<String> courses = await userByUsername(getUser['username']);
+  String comment = await courseComment(courses[0]);
+  print(comment);
 }
 
 Future<String> courseComment(String course) {
